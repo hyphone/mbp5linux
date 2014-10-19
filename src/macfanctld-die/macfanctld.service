@@ -1,0 +1,13 @@
+[Unit]
+Description=Macfanctld
+After=bootup.service
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/macfanctld
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target bootup.service
