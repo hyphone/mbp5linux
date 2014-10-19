@@ -1,0 +1,11 @@
+[Unit]
+Description=GPUBOOT: apply power saving features . . .
+After=basic.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/bin/gpuboot
+
+[Install]
+WantedBy=basic.target

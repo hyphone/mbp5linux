@@ -1,0 +1,11 @@
+[Unit]
+Description=GPURESUME: Init GPU . . .
+After=suspend.target hibernate.target hybrid-sleep.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/bin/gpuresume
+
+[Install]
+WantedBy=suspend.target hibernate.target hybrid-sleep.target
