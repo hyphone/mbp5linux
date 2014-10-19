@@ -17,13 +17,13 @@ __installation__
 * open terminal
 * # git clone https://github.com/hyphone/mbp5linux.git
 * # cd mbp5linux
-* sudo cp -r ./bin/* /bin
-* sudo cp -r ./etc/* /etc
-* sudo cp -r ./sbin/* /sbin
-* sudo gpuchange (to initialize the script for the first time)
-* sudo systemctl enable macfanctld
-* sudo systemctl enable gpuboot
-* sudo systemctl enable gpuresume
+* # sudo cp -r ./bin/* /bin/
+* # sudo cp -r ./etc/* /etc/
+* # sudo cp -r ./sbin/* /sbin/
+* # sudo gpuchange (to initialize the script for the first time)
+* # sudo systemctl enable macfanctld
+* # sudo systemctl enable gpuboot
+* # sudo systemctl enable gpuresume
 * reboot
 
 __comfortable usage__
@@ -31,6 +31,7 @@ __comfortable usage__
 https://github.com/hyphone/mbpgpuswitcher-shell-extension
 
 __usage__
-* run gpuchange with root previleges to set a flag to change the GPU on the next boot
-* you can run gpuchange i or gpuchange d to specify the GPU you want to use
+* run _gpuchange_ with root previleges to set a flag to change the GPU on the next boot
+* run _gpuchange_ again to revert the changes so the GPU stays the same on the next boot
+* you can run _gpuchange i_ or _gpuchange d_ to specify the GPU you want to use
 
