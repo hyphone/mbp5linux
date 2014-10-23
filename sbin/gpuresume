@@ -4,12 +4,12 @@ function setgpu {
 	if [ "$1" == "i" ]
 	then
 		echo "GPURESUME: $gpu set as integrated"
-		/bin/igd
+		/sbin/igd
 		echo "GPURESUME: igd executed"
 	elif [ "$1" == "d" ]
 	then
 		echo "GPURESUME: $gpu set as dedicated"
-		/bin/dgd
+		/sbin/dgd
 		echo "GPURESUME: dgd executed"
 	else
 		echo "GPURESUME: wrong string in $gpu - please restart changegpu"

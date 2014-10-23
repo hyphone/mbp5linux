@@ -9,9 +9,9 @@ function setgpu {
 		echo "GPUBOOT: xorg.conf_i used"
 		cp /etc/macfanctl.conf_i /etc/macfanctl.conf
 		echo "GPUBOOT: macfanctl.conf_i used"
-		/bin/igd
+		/sbin/igd
 		echo "GPUBOOT: igd executed"
-		sleep 1
+		#sleep 1
 	#	/sbin/modprobe nvidia; /sbin/modprobe nvidia_uvm; test -c /dev/nvidia-uvm || /usr/bin/mknod -m 660 /dev/nvidia-uvm c $(cat /proc/devices | while read major device; do if [ "$device" == "nvidia-uvm" ]; then echo $major; break; fi ; done) 0 && /usr/bin/chown :video /dev/nvidia-uvm; test -c /dev/nvidiactl || /usr/bin/mknod -m 660 /dev/nvidiactl c 195 255 && chown :video /dev/nvidiactl; test -c /dev/nvidia0 || /usr/bin/mknod -m 660 /dev/nvidia0 c 195 0 && chown :video /dev/nvidia0
 		/sbin/modprobe nvidia
 		/sbin/modprobe nvidia_uvm	
@@ -29,9 +29,9 @@ function setgpu {
 		echo "GPUBOOT: xorg.conf_d used"
 		cp /etc/macfanctl.conf_d /etc/macfanctl.conf
 		echo "GPUBOOT: macfanctl.conf_d used"
-		/bin/dgd
+		/sbin/dgd
 		echo "GPUBOOT: dgd executed"
-		sleep 1
+		#sleep 1
 	#	/sbin/modprobe nvidia; /sbin/modprobe nvidia_uvm; test -c /dev/nvidia-uvm || /usr/bin/mknod -m 660 /dev/nvidia-uvm c $(cat /proc/devices | while read major device; do if [ "$device" == "nvidia-uvm" ]; then echo $major; break; fi ; done) 0 && /usr/bin/chown :video /dev/nvidia-uvm; test -c /dev/nvidiactl || /usr/bin/mknod -m 660 /dev/nvidiactl c 195 255 && chown :video /dev/nvidiactl; test -c /dev/nvidia0 || /usr/bin/mknod -m 660 /dev/nvidia0 c 195 0 && chown :video /dev/nvidia0
 		/sbin/modprobe nvidia
 		/sbin/modprobe nvidia_uvm	
@@ -41,22 +41,40 @@ function setgpu {
 		echo 'auto' > '/sys/bus/pci/devices/0000:02:00.0/power/control'
 		echo "GPUBOOT: power auto"
 	else
-		exit 0
+		return 0
 	fi
 
-	exit 1
+	return 1
 }
 
 gpu="/etc/gpu"
-gpunew="/etc/gpunew"
-if [ -f "$gpunew" ]
+
+gpunew=""
+FILES=/home/**/.gpunew
+for f in $FILES
+do
+	if [[ -n "$gpunew" ]]
+	then	
+		if [ "$f" -nt "$gpunew" ]; then
+		    gpunew=$f
+		    actgpu=`cat $gpunew`
+		    rm -f "$gpunew"
+		fi
+	else
+		gpunew=$f
+		actgpu=`cat $gpunew`
+		rm -f "$gpunew"
+	fi
+	# echo "$gpunew"
+done
+
+if [[ -n "$actgpu" ]]
 then
-	actgpu=`cat $gpunew`
 	echo "GPUBOOT: $gpunew found ($actgpu)"
 	setgpu $actgpu
 	echo "$actgpu" > "$gpu"
-	rm "$gpunew"
-elif [ -f "$gpu" ]
+	echo "GPUBOOT: $gpu updated"
+elif [[ -f "$gpu" ]]
 then
 	actgpu=`cat $gpu`
 	echo "GPUBOOT: $gpu found ($actgpu)"

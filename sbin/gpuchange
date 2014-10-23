@@ -24,7 +24,7 @@ function setgpu {
 }
 
 gpu="/etc/gpu"
-gpunew="/etc/gpunew"
+gpunew="${HOME}/.gpunew"
 if [ -f "$gpu" ]
 then
 	actgpu=`cat $gpu`

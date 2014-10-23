@@ -5,7 +5,7 @@ After=basic.target
 [Service]
 User=root
 Type=simple
-ExecStart=/bin/gpuboot
+ExecStart=/sbin/gpuboot
 
 [Install]
 WantedBy=basic.target
