@@ -2,9 +2,9 @@
 
 function setgpu {
 	if [ "$1" == "i" ]
-	then
-		echo 1 > /sys/devices/pci0000:00/0000:00:0c.0/0000:02:00.0/remove
-		echo "GPUBOOT: 9600M GT removed"
+	then		
+		# echo 1 > /sys/devices/pci0000:00/0000:00:0c.0/0000:02:00.0/remove
+		# echo "GPUBOOT: 9600M GT removed"
 		cp /etc/X11/xorg.conf_i /etc/X11/xorg.conf
 		echo "GPUBOOT: xorg.conf_i used"
 		cp /etc/macfanctl.conf_i /etc/macfanctl.conf
@@ -23,8 +23,9 @@ function setgpu {
 
 	elif [ "$1" == "d" ]
 	then
-		echo 1 > /sys/devices/pci0000:00/0000:00:10.0/0000:03:00.0/remove
-		echo "GPUBOOT: 9400M removed"
+		echo 'auto' > '/sys/bus/pci/devices/0000:03:00.0/power/control'
+		# echo 1 > /sys/devices/pci0000:00/0000:00:10.0/0000:03:00.0/remove
+		# echo "GPUBOOT: 9400M removed"
 		cp /etc/X11/xorg.conf_d /etc/X11/xorg.conf
 		echo "GPUBOOT: xorg.conf_d used"
 		cp /etc/macfanctl.conf_d /etc/macfanctl.conf
