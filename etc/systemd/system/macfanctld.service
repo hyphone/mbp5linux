@@ -1,6 +1,6 @@
 [Unit]
 Description=Macfanctld
-After=bootup.service
+After=gpuboot.service
 
 [Service]
 Type=simple
