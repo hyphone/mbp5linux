@@ -43,7 +43,7 @@ then
 	setgpu $1
 else
 	echo "GPUCHANGE: running for the first time or not rebooted since the first run. creating configuration for reboot"
-	touch "$gpunew"
+	echo "i" > "$gpunew"
 	actgpu=""
 	setgpu "i"
 fi
