@@ -1,6 +1,6 @@
 [Unit]
 Description=Macfanctld
-After=bootup.service
+After=gpuboot.service
 
 [Service]
 Type=simple
@@ -10,4 +10,4 @@ KillMode=process
 Restart=always
 
 [Install]
-WantedBy=multi-user.target bootup.service
+WantedBy=basic.target
